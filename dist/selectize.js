@@ -110,7 +110,10 @@ angular.module('selectize', []).value('selectizeConfig', {}).directive("selectiz
           selectize.setValue(scope.ngModel)
         }, true);
         
-        scope.$watchCollection('ngModel', updateSelectize);
+        modelCtrl.$render = function (value){
+          selectize.addOption(generateOptions(value));
+          selectize.setValue(value);
+        };
         scope.$watch('ngDisabled', toggle);
       }
 
